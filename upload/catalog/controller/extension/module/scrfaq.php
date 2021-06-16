@@ -13,7 +13,9 @@ class ControllerExtensionModuleScrfaq extends Controller
         $data['scrfaq_title'] = $setting['name'];
         $data['scrfaq_descr'] = @$setting['descr'];
         $data['answers'] = $this->model_extension_module_scrfaq->getAnswer($setting['mid']);
-
+        foreach ($data['answers'] as &$ans) {
+            $ans['description'] = html_entity_decode($ans['description']);
+        }
         return $this->load->view('extension/module/scrfaq', $data);
     }
 }
